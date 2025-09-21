@@ -174,8 +174,8 @@ public class MSOfficeManipulator {
 
     // Read relevant streams
     CFStorage commonStorage = cf.RootStorage; // docm or xlsm
-    if (cf.RootStorage.TryGetStorage("Macros") != null) commonStorage = cf.RootStorage.GetStorage("Macros"); // .doc
-    if (cf.RootStorage.TryGetStorage("_VBA_PROJECT_CUR") != null) commonStorage = cf.RootStorage.GetStorage("_VBA_PROJECT_CUR"); // xls
+    if (cf.RootStorage.TryGetStorage("Macros", out CFStorage macrosStorage)) commonStorage = macrosStorage; // .doc
+    if (cf.RootStorage.TryGetStorage("_VBA_PROJECT_CUR", out CFStorage vbaProjectCurStorage)) commonStorage = vbaProjectCurStorage; // xls
     vbaProjectStream = commonStorage.GetStorage("VBA").GetStream("_VBA_PROJECT").GetData();
     projectStream = commonStorage.GetStream("project").GetData();
     projectwmStream = commonStorage.GetStream("projectwm").GetData();
