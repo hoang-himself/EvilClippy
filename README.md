@@ -26,31 +26,38 @@ At the time of writing, this tool is capable of getting a default Cobalt Strike 
 ## Technology
 Evil Clippy uses the [OpenMCDF library](https://github.com/ironfede/openmcdf/) to manipulate MS Office Compound File Binary Format (CFBF) files, and hereto abuses [MS-OVBA specifications](https://docs.microsoft.com/en-us/openspecs/office_file_formats/ms-ovba/) and features. It reuses code from [Kavod.VBA.Compression](https://github.com/rossknudsen/Kavod.Vba.Compression) to implement the compression algorithm that is used in dir and module streams (see MS-OVBA for relevant specifications).
 
-Evil Clippy compiles perfectly fine with the Mono C# compiler and has been tested on Linux, OSX and Windows.
+This project has been modernized to use .NET 9 and runs cross-platform on Linux, macOS and Windows.
 
 ## Compilation
 
 We do not provide a binary release for EvilClippy. Please compile executables yourself:
 
-**OSX and Linux**
+**All Platforms (Linux, macOS, Windows)**
 
-Make sure you have Mono installed. Then execute the following command from the command line:
+Make sure you have [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0) installed. Then execute the following command from the command line:
 
-`mcs /reference:OpenMcdf.dll,System.IO.Compression.FileSystem.dll /out:EvilClippy.exe *.cs`
+```bash
+dotnet build -c Release
+```
 
-Now run Evil Clippy from the command line:
+The compiled executable will be located in `bin/Release/net9.0/`
 
-`mono EvilClippy.exe -h`
+**Run Evil Clippy**
 
-**Windows**
+On Windows:
+```
+.\bin\Release\net9.0\EvilClippy.exe -h
+```
 
-Make sure you have Visual Studio installed. Then execute the following command from a Visual Studio developer command prompt:
+On Linux/macOS:
+```bash
+./bin/Release/net9.0/EvilClippy -h
+```
 
-`csc /reference:OpenMcdf.dll,System.IO.Compression.FileSystem.dll /out:EvilClippy.exe *.cs`
-
-Now run Evil Clippy from the command line:
-
-`EvilClippy.exe -h`
+Alternatively, you can run directly with:
+```bash
+dotnet run -- -h
+```
 
 ## Usage examples
 
